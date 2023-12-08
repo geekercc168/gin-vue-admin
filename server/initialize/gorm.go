@@ -33,8 +33,9 @@ func Gorm() *gorm.DB {
 // RegisterTables 注册数据库表专用
 // Author SliverHorn
 func RegisterTables() {
+	m := global.GVA_CONFIG.Mysql
 	db := global.GVA_DB
-	err := db.AutoMigrate(
+	err := db.Set("gorm:table_options", "ENGINE="+m.Engine).AutoMigrate(
 		// 系统模块表
 		system.SysApi{},
 		system.SysUser{},
